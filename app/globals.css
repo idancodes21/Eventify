@@ -127,9 +127,16 @@
   html {
     @apply font-sans;
   }
+  h2 {
+  font-size: 1.75rem;
+  font-weight: 700;   
+  color: black;     
+  line-height: 1.2;
+  letter-spacing: -0.01em;
+  margin-bottom: 1.5rem;
+  }
 
   .logo {
-    /* font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif; */
   font-size: 1.75rem;
   font-weight: 700;   
   color: var(--primary);     
