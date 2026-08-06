@@ -1,0 +1,41 @@
+model User {
+  id String @id @default(uuid()) @db.Uuid
+
+  firstName String
+  lastName  String
+
+  username String @unique
+  email    String @unique
+  password String
+
+  avatarUrl String?
+  bio       String?
+  headline  String?
+  location  String?
+  phone     String?
+
+  website   String?
+  twitter   String?
+  instagram String?
+  linkedin  String?
+
+  role Role @default(USER)
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  // ======================
+  // Relations
+  // ======================
+
+  organizedEvents Event[]
+
+  ticketOrders TicketOrder[]
+
+  savedEvents SavedEvent[]
+
+  interests UserInterest[]
+
+  followers UserFollow[] @relation("UserFollowers")
+  following UserFollow[] @relation("UserFollowing")
+}

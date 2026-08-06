@@ -1,0 +1,158 @@
+// ======================================================
+// VENUE
+// ======================================================
+
+model Venue {
+  id String @id @default(uuid()) @db.Uuid
+
+  name    String
+  address String
+  city    String
+  state   String
+  country String
+
+  latitude  Decimal?
+  longitude Decimal?
+
+  googleMapsUrl String?
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  // ======================
+  // Relations
+  // ======================
+
+  events Event[]
+
+  @@map("venues")
+}
+
+// ======================================================
+// EVENT
+// ======================================================
+
+model Event {
+  id String @id @default(uuid()) @db.Uuid
+
+  title String
+  slug  String @unique
+
+  description String
+
+  bannerUrl String
+
+  organizerId String @db.Uuid
+
+  venueId String @db.Uuid
+
+  categoryId String @db.Uuid
+
+  capacity Int
+
+  isPublic Boolean @default(true)
+
+  status EventStatus @default(PUBLISHED)
+
+  createdAt DateTime @default(now())
+
+  updatedAt DateTime @updatedAt
+
+  // ======================
+  // Relations
+  // ======================
+
+  organizer User @relation(fields: [organizerId], references: [id], onDelete: Cascade)
+
+  venue Venue @relation(fields: [venueId], references: [id])
+
+  category Category @relation(fields: [categoryId], references: [id])
+
+  sessions Session[]
+
+  tickets Ticket[]
+
+  tags EventTag[]
+
+  savedBy SavedEvent[]
+
+  @@index([categoryId])
+  @@index([organizerId])
+  @@index([venueId])
+  @@index([status])
+  @@map("events")
+}
+
+// ======================================================
+// SESSION
+// ======================================================
+
+model Session {
+  id String @id @default(uuid()) @db.Uuid
+
+  eventId String @db.Uuid
+
+  startDate DateTime
+
+  endDate DateTime
+
+  createdAt DateTime @default(now())
+
+  updatedAt DateTime @updatedAt
+
+  // ======================
+  // Relations
+  // ======================
+
+  event Event @relation(fields: [eventId], references: [id], onDelete: Cascade)
+
+  @@index([eventId])
+  @@map("sessions")
+}
+
+// ======================================================
+// TAG
+// ======================================================
+
+model Tag {
+  id String @id @default(uuid()) @db.Uuid
+
+  name String @unique
+
+  createdAt DateTime @default(now())
+
+  updatedAt DateTime @updatedAt
+
+  // ======================
+  // Relations
+  // ======================
+
+  events EventTag[]
+
+  @@map("tags")
+}
+
+// ======================================================
+// EVENT TAG
+// ======================================================
+
+model EventTag {
+  eventId String @db.Uuid
+
+  tagId String @db.Uuid
+
+  createdAt DateTime @default(now())
+
+  updatedAt DateTime @updatedAt
+
+  // ======================
+  // Relations
+  // ======================
+
+  event Event @relation(fields: [eventId], references: [id], onDelete: Cascade)
+
+  tag Tag @relation(fields: [tagId], references: [id], onDelete: Cascade)
+
+  @@id([eventId, tagId])
+  @@map("event_tags")
+}

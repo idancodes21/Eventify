@@ -1,0 +1,28 @@
+enum Role {
+  USER
+  ADMIN
+}
+
+enum EventStatus {
+  PUBLISHED
+  COMPLETED
+  CANCELLED
+}
+
+enum OrderStatus {
+  PENDING
+  CONFIRMED
+  CANCELLED
+}
+
+enum PaymentStatus {
+  PENDING
+  SUCCESS
+  FAILED
+  REFUNDED
+}
+
+enum PaymentProvider {
+  PAYSTACK
+  STRIPE
+}
