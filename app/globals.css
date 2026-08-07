@@ -49,13 +49,14 @@
 }
 
 :root {
+  color-scheme: light;
   --background: oklch(1 0 0);
   --foreground: oklch(0.145 0 0);
   --card: oklch(1 0 0);
   --card-foreground: oklch(0.145 0 0);
   --popover: oklch(1 0 0);
   --popover-foreground: oklch(0.145 0 0);
-  --primary: #FFE047;
+  --primary: oklch(14.11% 0.0018 16.88);
   --primary-foreground: oklch(0.985 0 0);
   --secondary: oklch(0.97 0 0);
   --secondary-foreground: oklch(0.205 0 0);
@@ -84,6 +85,7 @@
 }
 
 .dark {
+  color-scheme: dark;
   --background: oklch(0.145 0 0);
   --foreground: oklch(0.985 0 0);
   --card: oklch(0.205 0 0);
@@ -130,7 +132,7 @@
   h2 {
   font-size: 1.75rem;
   font-weight: 700;   
-  color: black;     
+  color: var(--primary);     
   line-height: 1.2;
   letter-spacing: -0.01em;
   margin-bottom: 1.5rem;

@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import { Plus_Jakarta_Sans } from "next/font/google";
 import "./globals.css";
-import Navbar from "@/components/Navbar";
+import Providers from "@/components/providers";
 
 const mainFont = Plus_Jakarta_Sans({
   subsets: ["latin"],
@@ -21,8 +21,9 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
       className={`${mainFont.className} h-full antialiased`}
     >
       <body className="min-h-full flex flex-col">
-        <Navbar />
-        {children}
+        <Providers>
+          {children}
+        </Providers>
         </body>
     </html>
   );
