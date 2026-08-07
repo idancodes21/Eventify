@@ -28,6 +28,8 @@ model User {
   // Relations
   // ======================
 
+  accounts Account[]
+
   organizedEvents Event[]
 
   ticketOrders TicketOrder[]
